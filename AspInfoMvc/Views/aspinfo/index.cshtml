@@ -52,6 +52,7 @@
     <table style="border:0; padding:3px; width:65%">
         <tbody>
             @{
+                // Maybe it would be better to go through server variabales in a more differentiate way, rather than taking them all this way?
                 String[] serverVariable = Model.ServerVariables.AllKeys;
    
                 for (int ndx = 0; ndx < serverVariable.Length; ndx++ )
@@ -102,8 +103,7 @@
                                 }
                             }   
                         </td>     
-                    </tr>
-                
+                    </tr>                
                 }
             }
         </tbody>  

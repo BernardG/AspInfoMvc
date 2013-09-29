@@ -9,5 +9,5 @@ Anyway, I certainly hope it can be useful to some, and I would certainly appreci
 as I am far from being an Asp/Mvc guru! I would love to make this into a DLL and a simple function to call,
 just like with PhpInfo(), instead of a whole (tiny) MVC project.
 
-BTW, this has been tested with ASP.NET MVC 4.0, both on Windows 8 and Ubuntu Server 12.04, with XSP and Aapche.
+BTW, this has been tested with ASP.NET MVC 4.0, both on Windows 8 and Ubuntu Server 12.04, with XSP and Apache.
 

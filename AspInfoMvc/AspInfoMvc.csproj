@@ -191,6 +191,7 @@
     <None Include="Properties\PublishProfiles\Home FirstMvc4Test XSP.pubxml" />
     <None Include="Properties\PublishProfiles\Mvc4Test Ubuntu Local.pubxml" />
     <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <None Include="README" />
     <Content Include="Scripts\jquery-1.4.4.js" />
     <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />

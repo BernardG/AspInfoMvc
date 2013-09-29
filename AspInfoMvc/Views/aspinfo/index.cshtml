@@ -1,0 +1,111 @@
+﻿@model AspInfoMvc.Controllers.InfoClass
+
+@{
+    int assemblyCount = Model.LoadedAssemblies.Count(); 
+}
+
+<style type="text/css">
+    body {background-color: #ffffff; color: #000000;}
+    body, td, th, h1, h2 {font-family: sans-serif;}
+    pre {margin: 0px; font-family: monospace;}
+    a:link {color: #000099; text-decoration: none; background-color: #ffffff;}
+    a:hover {text-decoration: underline;}
+    table {border-collapse: collapse;}
+    .center {text-align: center;}
+    .center table { margin-left: auto; margin-right: auto; text-align: left;}
+    .center th { text-align: center !important; }
+    td, th { border: 1px solid #000000; font-size: 75%; vertical-align: baseline;}
+    h1 {font-size: 150%;}
+    h2 {font-size: 125%;}
+    .p {text-align: left;}
+    .e {background-color: #ccccff; font-weight: bold; color: #000000;}
+    .h {background-color: #9999cc; font-weight: bold; color: #000000;}
+    .v {background-color: #cccccc; color: #000000;}
+    .d {background-color: #d0d0e0; font-weight: bold; color: #000000;}
+    .vr {background-color: #cccccc; text-align: right; color: #000000;}
+    img {float: right; border: 0px;}
+    hr {width: 65%; background-color: #cccccc; border: 0px; height: 1px; color: #000000;}
+</style>
+
+<div class="center">
+    <table style="border:0; padding:3px; width:65%">
+        <tbody>
+            @{
+                string[] serverSoftware = Model.ServerSoftware;          
+                
+                var mvcAssembly = Model.MvcDll;
+                var Os = Model.OperatingSystem;
+                string netversion = Model.NetVersion + " (" + Model.NetBitness.ToString() + "-bits) ";
+                               
+                <tr class="h">
+                    <td>
+                        <a href="http://www.asp.net/vnext">
+                            <img border="0" src="~/content/asplogo.png" alt="Asp.net Logo"/>
+                        </a>
+                        <h1>@mvcAssembly.GetName().Name Version: @mvcAssembly.GetName().Version running on @serverSoftware[0]<br/>Server OS: @Os<br/>.Net Version: @netversion</h1>                                                                              
+                    </td>          
+                </tr>
+            }            
+        </tbody>
+    </table>
+    <br/>
+    <table style="border:0; padding:3px; width:65%">
+        <tbody>
+            @{
+                String[] serverVariable = Model.ServerVariables.AllKeys;
+   
+                for (int ndx = 0; ndx < serverVariable.Length; ndx++ )
+                {
+                    <tr>
+                        <td class="e"> @serverVariable[ndx] </td>
+                        <td class="v">
+                        @{
+                            String[] value = Model.ServerVariables.GetValues(serverVariable[ndx]);
+                            String[] splitvalue = value[0].Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
+                            for (int ndx2 = 0; ndx2 < splitvalue.Count(); ndx2++)
+                            {
+                             <code style="font-size: larger">@Server.HtmlEncode(splitvalue[ndx2])<br/></code>
+                            }
+                        } 
+                        </td>                     
+                    </tr>
+                }
+            }
+        </tbody>
+    </table> 
+    <br/>
+    <h1>@assemblyCount Assemblies Loaded</h1>
+    <table style="border:0; padding:3px; width:55%">
+        <tbody>
+            <tr class="h">
+                <td><h2>Assembly Name</h2></td>                            
+                <td><h2>Version</h2></td> 
+                <td><h2>Referenced Assemblies</h2></td>
+            </tr>
+            @{
+                var assemblies = Model.LoadedAssemblies;
+                foreach (System.Reflection.Assembly assembly in assemblies)
+                {
+                    string name = assembly.GetName().Name;
+                
+                    string version = assembly.GetName().Version.ToString();
+                    <tr>
+                        <td class="e">@name</td>                            
+                        <td class="v">@version</td> 
+                        <td class="d">
+                            @{
+                                foreach (var localassembly in assembly.GetReferencedAssemblies())
+                                {
+                                    string localname = localassembly.Name;
+                                    string localversion = localassembly.Version.ToString();
+                                    <code style="font-size: larger"> @localname Version @localversion </code><br/>
+                                }
+                            }   
+                        </td>     
+                    </tr>
+                
+                }
+            }
+        </tbody>  
+    </table>                   
+</div>

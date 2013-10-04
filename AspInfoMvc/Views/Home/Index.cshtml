@@ -52,7 +52,7 @@
     <table style="border:0; padding:3px; width:65%">
         <tbody>
             @{
-                // Maybe it would be better to go through server variabales in a more differentiate way, rather than taking them all this way?
+                // Maybe it would be better to go through server variables in a more differentiate way, rather than taking them all this way?
                 String[] serverVariable = Model.ServerVariables.AllKeys;
    
                 for (int ndx = 0; ndx < serverVariable.Length; ndx++ )
@@ -65,7 +65,7 @@
                             String[] splitvalue = value[0].Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
                             for (int ndx2 = 0; ndx2 < splitvalue.Count(); ndx2++)
                             {
-                             <code style="font-size: larger">@Server.HtmlEncode(splitvalue[ndx2])<br/></code>
+                                <code style="font-size: larger">@Server.HtmlEncode(splitvalue[ndx2])</code><br />
                             }
                         } 
                         </td>                     
@@ -76,7 +76,7 @@
     </table> 
     <br/>
     <h1>@assemblyCount Assemblies Loaded</h1>
-    <table style="border:0; padding:3px; width:55%">
+    <table style="border:0; padding:3px; width:65%">
         <tbody>
             <tr class="h">
                 <td><h2>Assembly Name</h2></td>                            

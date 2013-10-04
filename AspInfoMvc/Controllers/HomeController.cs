@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
@@ -20,12 +19,12 @@ namespace AspInfoMvc.Controllers
             get { return HttpContext.Current.Request.ServerVariables.GetValues("SERVER_SOFTWARE"); }
         }
 
-        public System.Reflection.Assembly[] LoadedAssemblies
+        public Assembly[] LoadedAssemblies
         {
             get { return AppDomain.CurrentDomain.GetAssemblies().Concat(AppDomain.CurrentDomain.GetAssemblies()).Distinct().OrderBy(o => o.FullName).ToArray(); }
         }
 
-        public System.Reflection.Assembly MvcDll
+        public Assembly MvcDll
         {
             get { return AppDomain.CurrentDomain.Load("System.Web.Mvc"); }
         }
@@ -46,15 +45,12 @@ namespace AspInfoMvc.Controllers
         }               
     }
 
-    public class AspInfoController : Controller
+    public class HomeController : Controller
     {
-        //
-        // GET: /AspInfo/
         public InfoClass MyInfo = new InfoClass();
 
         public ActionResult Index()
         {
-
             return View(MyInfo);
         }
 
